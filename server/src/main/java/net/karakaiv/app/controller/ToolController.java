@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import net.karakaiv.app.enums.Tool;
-import net.karakaiv.app.model.IpV4Address;
+import net.karakaiv.app.model.Address;
 import net.karakaiv.app.model.StorageData;
 import net.karakaiv.app.request.PingRequest;
 import net.karakaiv.app.response.Response;
 import net.karakaiv.app.token.TokenService;
+import net.karakaiv.app.network.AddressFactory;
 
 @RestController
 @RequestMapping(path = "/tool")
@@ -24,20 +25,21 @@ public class ToolController {
     
     @GetMapping(path = "/ping")
     public ResponseEntity<Response> ping(@RequestBody PingRequest request) {
-        IpV4Address address = new IpV4Address(request.getAddress());
-        StorageData data = new StorageData(address, request.getCount(), Tool.PING);
+        Address address = AddressFactory.from(request.getAddress());
 
         if (address.isValid()) {
             return ResponseEntity.ok(
                 new Response(Instant.now().toString(), 
                 "token",
-                tokenService.generate(data))
+                tokenService.generate(
+                    new StorageData(address, request.getCount(), Tool.PING)
+                ))
             );
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 new Response(Instant.now().toString(), 
                 "error",
-                "Not valid IPv4 address.")
+                "Not valid address.")
             );
         }
     }
