@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.karakaiv.app.model.IpV4Address;
+import net.karakaiv.app.model.Address;
 import net.karakaiv.app.network.tool.Command;
 import net.karakaiv.app.network.tool.ping.model.Result;
 
@@ -21,7 +21,7 @@ public class Ping extends Command implements Runnable {
 
     private final ArrayList<Result> results;
 
-    private IpV4Address address;
+    private Address address;
 
     private Integer bytes = 32;
 
@@ -34,7 +34,7 @@ public class Ping extends Command implements Runnable {
     // FIXME: add ttl feature
     // private Integer ttl = 117;
 
-    public Ping(ArrayList<Result> results, IpV4Address address) {
+    public Ping(ArrayList<Result> results, Address address) {
         this.results = results;
         this.address = address;
     }

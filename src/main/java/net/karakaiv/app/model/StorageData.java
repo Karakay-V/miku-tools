@@ -14,7 +14,7 @@ import net.karakaiv.app.enums.Tool;
 @ToString
 public class StorageData {
 
-    private IpV4Address address;
+    private Address address;
 
     private Integer packetsCount = 300;
 

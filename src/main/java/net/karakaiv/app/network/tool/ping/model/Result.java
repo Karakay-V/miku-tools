@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.karakaiv.app.model.IpV4Address;
+import net.karakaiv.app.model.Address;
 
 @Setter
 @Getter
@@ -12,7 +12,7 @@ import net.karakaiv.app.model.IpV4Address;
 @NoArgsConstructor
 public class Result {
     
-    private IpV4Address address;
+    private Address address;
 
     private Integer bytes;
 
@@ -25,7 +25,7 @@ public class Result {
     public String toString() {
         if (time != null) {
             return "Reply from " 
-                + address.getAddress() 
+                + address.toString() 
                 + ": bytes=" + bytes
                 + " time=" + time + "ms";
         } else {

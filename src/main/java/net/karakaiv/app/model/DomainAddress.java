@@ -11,25 +11,24 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class IpV4Address implements Address {
-    
-    private String address;
-    
-    private static final String IPV4_REGEX = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
+public class DomainAddress implements Address {
 
-    private static final Pattern IPV4_PATTERN = Pattern.compile(IPV4_REGEX);
+    private String domain;
+    
+    private static final String DOMAIN_REGEX = "^(?!-)([\\p{L}\\p{N}-]{1,63}(?<!-)\\.)+[\\p{L}]{2,}$";
+
+    private static final Pattern DOMAIN_PATTERN = Pattern.compile(DOMAIN_REGEX);
 
     @Override
     public boolean isValid() {
-        if (address == null) return false;
+        if (domain == null) return false;
         
-        Matcher matcher = IPV4_PATTERN.matcher(address);
+        Matcher matcher = DOMAIN_PATTERN.matcher(domain);
         return matcher.matches();
     }
 
     @Override
     public String toString() {
-        return isValid() ? address : "";
+        return isValid() ? domain : "";
     }
-
 }

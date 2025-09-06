@@ -27,7 +27,7 @@ public class ToolController {
         IpV4Address address = new IpV4Address(request.getAddress());
         StorageData data = new StorageData(address, request.getCount(), Tool.PING);
 
-        if (address.isValidIp()) {
+        if (address.isValid()) {
             return ResponseEntity.ok(
                 new Response(Instant.now().toString(), 
                 "token",
