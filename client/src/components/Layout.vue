@@ -5,6 +5,16 @@
         <div class="content_inner">
             <div class="content_wrapper">
                 <h1 class="title">Net Tools</h1>
+
+                <div class="slot-container">                
+                    <slot>
+
+                        <!-- Windows will appear here -->
+
+                        <Window height="50%" />
+
+                    </slot>
+                </div>
             </div>
         </div>
     </div>
@@ -13,8 +23,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Background from "../assets/covers/background.png"
-// import Ping from ""
-
+import Window from './window/Window.vue';
 
 export default defineComponent({
     name: "Layout",
@@ -23,8 +32,11 @@ export default defineComponent({
             Background,
         });
     },
+    props: {
+
+    },
     components: {
-        // Ping,
+        Window,
     },
 });
 </script>
@@ -39,7 +51,6 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     position: relative;
-    @include image.prevent-manipulations;
 
     .background {
         width: 100%;
@@ -70,6 +81,12 @@ export default defineComponent({
                 color: $white;
                 text-align: center;
                 padding: 16px 0 16px;
+            }
+
+            .slot-container {
+                width: calc(100% - 59px - 59px);
+                height: calc(100% - 11px - 53px);
+                padding: 11px 59px 53px;
             }
         }
     }
